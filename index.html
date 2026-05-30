@@ -5,172 +5,101 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Битва Экстрасенсов — Бинго</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg: #0a0a0f;
-    --card-bg: #12111a;
-    --cell-bg: #1a1825;
-    --cell-hit: #4a1b6e;
-    --cell-hit-border: #9b59d0;
-    --cell-border: #2a2540;
-    --text: #e8e0ff;
-    --text-muted: #9a8fc0;
-    --accent: #c084fc;
-    --accent2: #e879f9;
-    --gold: #ffd700;
-  }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Georgia', serif;
-    min-height: 100vh;
-  }
-  #app { padding: 16px 12px 40px; max-width: 480px; margin: 0 auto; }
-
-  .header { text-align: center; margin-bottom: 18px; }
-  .stars { color: var(--accent2); font-size: 14px; letter-spacing: 4px; margin-bottom: 6px; }
-  .header h1 { font-size: 24px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); line-height: 1.3; }
-  .header p { font-size: 11px; color: var(--text-muted); margin-top: 4px; letter-spacing: 2px; text-transform: uppercase; }
-
-  .win-banner {
-    display: none;
-    text-align: center;
-    background: #1f1040;
-    border: 1px solid var(--gold);
-    border-radius: 10px;
-    padding: 14px;
-    margin-bottom: 14px;
-    animation: pulse 1s ease-in-out infinite alternate;
-  }
-  .win-banner.show { display: block; }
-  .win-banner h2 { font-size: 20px; color: var(--gold); letter-spacing: 2px; }
-  .win-banner p { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
-  @keyframes pulse {
-    from { border-color: var(--gold); }
-    to { border-color: var(--accent2); }
-  }
-
-  .progress { margin-bottom: 12px; }
-  .progress-bar-wrap {
-    background: var(--cell-bg);
-    border-radius: 20px;
-    height: 6px;
-    margin: 6px 0 4px;
-    overflow: hidden;
-    border: 1px solid var(--cell-border);
-  }
-  .progress-bar {
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    height: 100%;
-    border-radius: 20px;
-    transition: width 0.3s;
-  }
-  .progress span { font-size: 11px; color: var(--text-muted); }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 4px;
-    margin-bottom: 16px;
-  }
-  .cell {
-    background: var(--cell-bg);
-    border: 1px solid var(--cell-border);
-    border-radius: 6px;
-    padding: 6px 4px;
-    text-align: center;
-    font-size: 10px;
-    line-height: 1.3;
-    min-height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.15s, border-color 0.15s, transform 0.1s;
-    color: var(--text-muted);
-    position: relative;
-    -webkit-tap-highlight-color: transparent;
-    user-select: none;
-  }
-  .cell:active { transform: scale(0.94); }
-  .cell.hit {
-    background: var(--cell-hit);
-    border-color: var(--cell-hit-border);
-    color: var(--text);
-  }
-  .cell.free {
-    background: #1a1040;
-    border-color: var(--accent);
-    color: var(--accent);
-    font-size: 9px;
-    font-weight: bold;
-    letter-spacing: 0.5px;
-  }
-  .cell.free.hit {
-    background: #3a1060;
-    border-color: var(--accent2);
-    color: var(--accent2);
-  }
-  .cell.win-line {
-    background: #3d1060;
-    border-color: var(--gold);
-    color: var(--gold);
-  }
-  .checkmark {
-    position: absolute;
-    top: 2px; right: 3px;
-    font-size: 9px;
-    color: var(--accent2);
-  }
-
-  .btns { display: flex; gap: 8px; justify-content: center; margin-bottom: 10px; }
-  .btn {
-    background: transparent;
-    border: 1px solid var(--cell-border);
-    color: var(--text-muted);
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.15s;
-    letter-spacing: 0.5px;
-    font-family: Georgia, serif;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .btn.primary { border-color: var(--accent); color: var(--accent); }
-  .btn.primary:active { background: var(--accent); color: #0a0a0f; }
-  .btn:active { border-color: var(--text-muted); color: var(--text); }
-
-  .counter { font-size: 10px; color: var(--text-muted); text-align: center; opacity: 0.6; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0d0b14;
+  --cell: #17142a;
+  --cell-hit: #3b1a5e;
+  --border: #2e2850;
+  --border-hit: #8b5cf6;
+  --text: #ede9ff;
+  --muted: #8b83b0;
+  --accent: #a78bfa;
+  --accent2: #e879f9;
+  --gold: #fbbf24;
+}
+body { background: var(--bg); font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif; min-height: 100vh; }
+#app { padding: 14px 10px 40px; max-width: 440px; margin: 0 auto; }
+.header { text-align: center; margin-bottom: 14px; }
+.header h1 { font-size: 18px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); }
+.header sub { font-size: 10px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; display: block; margin-top: 2px; }
+.win-banner {
+  display: none; text-align: center;
+  background: #1c1030; border: 1.5px solid var(--gold);
+  border-radius: 10px; padding: 12px 10px; margin-bottom: 12px;
+}
+.win-banner.show { display: block; animation: glow 0.9s ease-in-out infinite alternate; }
+.win-banner h2 { font-size: 18px; color: var(--gold); font-weight: 700; }
+.win-banner p { font-size: 11px; color: var(--muted); margin-top: 3px; }
+@keyframes glow { from { border-color: var(--gold); } to { border-color: var(--accent2); } }
+.pgbar-wrap { background: var(--cell); border-radius: 20px; height: 5px; margin: 0 0 12px; overflow: hidden; }
+.pgbar { background: var(--accent); height: 100%; border-radius: 20px; transition: width .3s; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  margin-bottom: 14px;
+}
+.cell {
+  background: var(--cell);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 5px;
+  min-height: 72px;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: var(--text);
+  cursor: pointer;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  transition: background .12s, border-color .12s, transform .08s;
+  word-break: break-word;
+  hyphens: auto;
+}
+.cell:active { transform: scale(0.93); }
+.cell.hit { background: var(--cell-hit); border-color: var(--border-hit); }
+.cell.free {
+  background: #1a0e38; border-color: var(--accent);
+  color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: 1px;
+}
+.cell.free.hit { background: #2e1558; border-color: var(--accent2); color: var(--accent2); }
+.cell.winline { background: #2a1050; border-color: var(--gold); color: var(--gold); }
+.tick { position: absolute; top: 3px; right: 4px; font-size: 10px; color: var(--accent2); font-weight: 700; }
+.btns { display: flex; gap: 8px; justify-content: center; }
+.btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 10px 18px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+  transition: all .15s;
+}
+.btn.p { border-color: var(--accent); color: var(--accent); }
+.btn:active { opacity: .7; transform: scale(.97); }
+.info { text-align: center; font-size: 10px; color: var(--muted); margin-top: 10px; opacity: .6; }
 </style>
 </head>
 <body>
 <div id="app">
   <div class="header">
-    <div class="stars">★ ★ ★ ★ ★</div>
-    <h1>Битва<br>Экстрасенсов</h1>
-    <p>Бинго</p>
+    <h1>★ Битва Экстрасенсов ★</h1>
+    <sub>Бинго</sub>
   </div>
-
-  <div class="win-banner" id="winBanner">
-    <h2>✦ БИНГО! ✦</h2>
-    <p id="winText">Пять в ряд — кричите БИНГО!</p>
-  </div>
-
-  <div class="progress">
-    <div class="progress-bar-wrap">
-      <div class="progress-bar" id="progressBar" style="width:0%"></div>
-    </div>
-    <span id="progressText">0 из 24 отмечено</span>
-  </div>
-
+  <div class="win-banner" id="wb"><h2>✦ БИНГО! ✦</h2><p id="wt">Четыре в ряд!</p></div>
+  <div class="pgbar-wrap"><div class="pgbar" id="pg" style="width:0%"></div></div>
   <div class="grid" id="grid"></div>
-
   <div class="btns">
-    <button class="btn primary" onclick="newCard()">✦ Новая карточка</button>
+    <button class="btn p" onclick="newCard()">✦ Новая карточка</button>
     <button class="btn" onclick="resetCard()">Сбросить</button>
   </div>
-  <div class="counter" id="counter"></div>
+  <div class="info" id="info"></div>
 </div>
 
 <script>
@@ -181,126 +110,113 @@ const POOL = [
   "Чёрная вдова",
   "Подклад",
   "Это не магия, а ваши загоны",
-  "Это не магия, у вас алкоголизм",
+  "Это не магия — алкоголизм",
   "Зелёный забор",
   "Кто-то куда-то убежал",
-  "Я был скептиком, но теперь я верю",
-  "Это духи немцев/партизанов",
-  "Я чувствую негативную энергетику",
+  "Я был скептиком, но теперь верю",
+  "Это духи немцев / партизанов",
+  "Чувствую негативную энергетику",
   "Меня аж затрясло",
   "Холод какой-то пошёл",
   "Это повергло нас в шок",
   "Мы ничего не понимали",
   "Уважаемые экстрасенсы, добрый вечер",
   "Добрый вечер, уважаемые экстрасенсы",
-  "Отсылка на участников битвы сильнейших",
-  "Искрометный юмор от диктора",
+  "Отсылка на битву сильнейших",
+  "Юмор от диктора",
   "Тупая шутка от Башарова",
   "Мне нужно на кладбище",
   "Докапались до левого чела",
-  "Кто до меня проходил испытание? Здесь всё закрыто!",
-  "Я вижу за вами *кто-то* стоит",
-  "Со мной как будто *имя* говорил, а не экстрасенс",
+  "Кто до меня проходил испытание?",
+  "Я вижу за вами родственника",
+  "Говорил как будто не экстрасенс",
   "Проклятий не существует",
   "Читает заклинание",
   "Ведущий Ларионов",
   "Ведущая Сотникова",
   "Ведущий Кислицин",
   "Все были потрясены",
-  "Я отказываюсь проходить испытание",
-  "Давайте я вам сам всё сниму",
-  "Тупой комментарий от Башарова",
-  "Провокация от Башарова",
-  "Эмоушанал дэмедж",
-  "Сеанс психотерапии",
+  "Отказываюсь проходить испытание",
+  "Я сам всё сниму",
   "Кто-то вошёл в транс",
   "Не снимайте!"
 ];
 
-let cells = [];
-let hits = new Set();
+let cells = [], hits = new Set(), freeIdx = 0;
 
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
+function shuffle(a) {
+  const b = [...a];
+  for (let i = b.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+    [b[i], b[j]] = [b[j], b[i]];
   }
-  return a;
+  return b;
 }
 
 function checkWin() {
-  const lines = [
-    [0,1,2,3,4],[5,6,7,8,9],[10,11,12,13,14],[15,16,17,18,19],[20,21,22,23,24],
-    [0,5,10,15,20],[1,6,11,16,21],[2,7,12,17,22],[3,8,13,18,23],[4,9,14,19,24],
-    [0,6,12,18,24],[4,8,12,16,20]
+  const L = [
+    [0,1,2,3],[4,5,6,7],[8,9,10,11],[12,13,14,15],
+    [0,4,8,12],[1,5,9,13],[2,6,10,14],[3,7,11,15],
+    [0,5,10,15],[3,6,9,12]
   ];
-  return lines.filter(l => l.every(i => hits.has(i)));
+  return L.filter(l => l.every(i => hits.has(i)));
 }
 
 function render() {
   const grid = document.getElementById('grid');
-  const winLines = checkWin();
-  const winSet = new Set(winLines.flat());
-
+  const wl = checkWin(), ws = new Set(wl.flat());
   grid.innerHTML = '';
-  cells.forEach((text, i) => {
-    const div = document.createElement('div');
-    div.className = 'cell';
-    const isFree = text === 'FREE';
-    if (isFree) div.classList.add('free');
-    if (hits.has(i)) div.classList.add('hit');
-    if (winSet.has(i) && hits.has(i)) div.classList.add('win-line');
-
-    if (isFree) {
-      div.innerHTML = '★<br>FREE<br>★';
+  cells.forEach((t, i) => {
+    const d = document.createElement('div');
+    d.className = 'cell';
+    if (t === 'FREE') d.classList.add('free');
+    if (hits.has(i)) d.classList.add('hit');
+    if (ws.has(i) && hits.has(i)) d.classList.add('winline');
+    if (t === 'FREE') {
+      d.innerHTML = '★<br>FREE<br>★';
     } else {
-      div.textContent = text;
+      d.textContent = t;
       if (hits.has(i)) {
-        const ck = document.createElement('span');
-        ck.className = 'checkmark';
-        ck.textContent = '✓';
-        div.appendChild(ck);
+        const s = document.createElement('span');
+        s.className = 'tick';
+        s.textContent = '✓';
+        d.appendChild(s);
       }
     }
-    div.addEventListener('click', () => toggle(i));
-    grid.appendChild(div);
+    d.addEventListener('click', () => {
+      hits.has(i) ? hits.delete(i) : hits.add(i);
+      render();
+    });
+    grid.appendChild(d);
   });
 
   const marked = [...hits].filter(i => cells[i] !== 'FREE').length;
-  const pct = Math.round(marked / 24 * 100);
-  document.getElementById('progressBar').style.width = pct + '%';
-  document.getElementById('progressText').textContent = marked + ' из 24 отмечено';
+  document.getElementById('pg').style.width = Math.round(marked / 15 * 100) + '%';
 
-  const wb = document.getElementById('winBanner');
-  if (winLines.length > 0) {
+  const wb = document.getElementById('wb');
+  if (wl.length > 0) {
     wb.classList.add('show');
-    document.getElementById('winText').textContent =
-      winLines.length === 1 ? 'Пять в ряд — кричите БИНГО!' : winLines.length + ' линии — невероятно!';
+    document.getElementById('wt').textContent = wl.length > 1
+      ? wl.length + ' линии — невероятно!'
+      : 'Четыре в ряд — кричите БИНГО!';
   } else {
     wb.classList.remove('show');
   }
 
-  document.getElementById('counter').textContent =
-    'Карточка использует 24 из ' + POOL.length + ' позиций пула';
-}
-
-function toggle(i) {
-  if (hits.has(i)) hits.delete(i);
-  else hits.add(i);
-  render();
+  document.getElementById('info').textContent = 'Карточка: 15 из ' + POOL.length + ' позиций';
 }
 
 function newCard() {
-  const selected = shuffle(POOL).slice(0, 24);
-  selected.splice(12, 0, 'FREE');
+  const selected = shuffle(POOL).slice(0, 15);
+  freeIdx = Math.floor(Math.random() * 16);
+  selected.splice(freeIdx, 0, 'FREE');
   cells = selected;
-  hits = new Set([12]);
+  hits = new Set([freeIdx]);
   render();
 }
 
 function resetCard() {
-  hits = new Set([12]);
+  hits = new Set([freeIdx]);
   render();
 }
 
